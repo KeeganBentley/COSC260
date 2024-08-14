@@ -31,15 +31,37 @@ function validate(e) {
     var form = document.getElementById("myform");
     
     firstname = form.elements["first"].value;
-    if (firstname.length === 0) {  
+    lastn = form.elements["last"].value;
+
+    if (firstname.length === 0 || lastn.length === 0) {
+        addError("Please enter both first and last names.");  
         success = false;
     }
     
     email = form.elements["email"].value;
-    if (/^[a-zA-Z0-9]+@(une|myune)[.]edu[.]au/.test(email)) {
+    if (/^[a-zA-Z0-9]+@(une|myune)[.]edu[.]au/.test(email) || email.length === 0) {
+        addError("Please enter a valid UNE email address.");
         success = false;
     }
 
+    phone = form.elements["mobile"].value;
+    if (/^04\d{8}$/.test(phone) || phone.length === 0) {
+        addError("Please enter a valid phone number.");
+        success = false;
+    }
+    
+    degree = form.elements["type"].value;
+    if (degree === "none") {
+        addError("Please select a degree type.");
+        success = false;
+    }
+
+    var onCampus = document.getElementById("mode_on");
+    var offCampus = document.getElementById("mode_off");
+    if (!onCampus.checked && !offCampus.checked) {
+        addError("Please select a study mode.");
+        success = false;
+    }
 
     if (success) {
         alert("The information you provided is valid.");
