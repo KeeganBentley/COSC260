@@ -1,9 +1,29 @@
 /* Button images */
-
+.button {
+    display: block;
+    background-image: url('../img/button_down.png');
+    cursor: pointer;
+}
 
 /* Fading image slider */
+#slide_img img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.0;
+}
 
+#silde_img img.active {
+    opacity: 1.0;
+}
 
 /* Fading text slider */
+#slide_info div {
+    opacity: 0.0;
+    position: absolute;
+}
 
+#slide_info div.active {
+    opacity: 1.0;
+}
 
