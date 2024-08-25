@@ -74,6 +74,10 @@ function animate(totalScore) {
     $('#ideal-pet-message').text(idealPetMessage);
     // Show the animation and register button after 10 seconds
     $('#animation').show();
+    setTimeout(function() {
+      $('#register-button').show();
+    }, 10000);
+
 }
 
 // Validate the form, returning true if valid, false otherwise
@@ -113,8 +117,6 @@ function validate(e) {
     if (success) {
         // Calculate the total score
         var total = space + exercise + grooming + noise + interaction;
-
-        alert("Your total score is: " + total);
         animate(total);
     }
     return success;
