@@ -28,7 +28,12 @@ function validate(e) {
     e.preventDefault();
     clearErrors();
     var success = true;
-    var form = document.getElementById("myform");
+    var form = document.getElementById("pet_test");
+    var space = parseInt(form.elements["space"].value);
+    var exericse = parseInt(form.elements["exercise"].value);
+    var grooming = parseInt(form.elements["grooming"].value);
+    var noise = parseInt(form.elements["noise"].value);
+    var interaction = parseInt(form.elements["interaction"].value);
     
     firstname = form.elements["first"].value;
     lastn = form.elements["last"].value;
@@ -39,13 +44,13 @@ function validate(e) {
     }
     
     email = form.elements["email"].value;
-    if (/^[a-zA-Z0-9]+@(une|myune)[.]edu[.]au/.test(email) || email.length === 0) {
+    if (!/^[a-zA-Z0-9]+@(une|myune)[.]edu[.]au/.test(email) || email.length === 0) {
         addError("Please enter a valid UNE email address.");
         success = false;
     }
 
     phone = form.elements["mobile"].value;
-    if (/^04\d{8}$/.test(phone) || phone.length === 0) {
+    if (!/^04\d{8}$/.test(phone) || phone.length === 0) {
         addError("Please enter a valid phone number.");
         success = false;
     }
@@ -64,7 +69,12 @@ function validate(e) {
     }
 
     if (success) {
-        alert("The information you provided is valid.");
+        // Calculate the total score
+        
+
+        var total = space + exericse + grooming + noise + interaction;
+
+        alert("Your total score is: " + total);
     }
     return success;
 }
