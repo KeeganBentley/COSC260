@@ -1,7 +1,12 @@
 // Window onLoad listener
 window.addEventListener("load", function (e) {
     // Wait until DOM is loaded
+
+    //this could just be a style ??
+    //$('pet-image').hide();
+
     document.getElementById("pet_test").addEventListener("submit", validate);
+    this.setInterval("updateImage()", 2000);
 });
 
 
@@ -22,6 +27,27 @@ function clearErrors(){
     }
 }
 
+// To rotate through the ideal pet elements - can be in separate js file
+function updateImage() {
+    var $active = $('#animation .active');
+  
+    var $next = $active.next();
+  
+    if ($next.length === 0) {
+      $next = $('#animation :first-child');
+    }
+  
+    $active.fadeTo(1000, 0.0, function() {
+      $active.removeClass('active');
+    });
+  
+    $next.fadeTo(1000, 1.0, function() {
+      $next.addClass('active');
+    });
+  }
+
+// Calculate the total score and display the appropriate pet image and message
+//this name isn't great
 function animate(totalScore) {
     let petImage = '';
     let scoreMessage = '';

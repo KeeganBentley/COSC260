@@ -6,7 +6,7 @@ $(function(){
 })
 
 function updateImage() {
-  var $active = $('#slide_img img.active');
+  var $active = $('#slide_img .active');
 
   var $next = $active.next();
 
