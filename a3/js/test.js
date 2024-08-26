@@ -116,6 +116,7 @@ function validate(e) {
 
     if (success) {
         // Calculate the total score
+        // possibly hide the initial form and add a back button to return 
         var total = space + exercise + grooming + noise + interaction;
         animate(total);
     }
