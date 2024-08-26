@@ -29,11 +29,7 @@ function validate(e) {
     clearErrors();
     var success = true;
     var form = document.getElementById("pet_test");
-    var space = parseInt(form.elements["space"].value);
-    var exericse = parseInt(form.elements["exercise"].value);
-    var grooming = parseInt(form.elements["grooming"].value);
-    var noise = parseInt(form.elements["noise"].value);
-    var interaction = parseInt(form.elements["interaction"].value);
+    
     
     firstname = form.elements["first"].value;
     lastn = form.elements["last"].value;
@@ -49,25 +45,15 @@ function validate(e) {
         success = false;
     }
 
+    //this is optional 
     phone = form.elements["mobile"].value;
-    if (!/^04\d{8}$/.test(phone) || phone.length === 0) {
+    if (!/^04\d{8}$/.test(phone)) {
         addError("Please enter a valid phone number.");
         success = false;
     }
     
-    degree = form.elements["type"].value;
-    if (degree === "none") {
-        addError("Please select a degree type.");
-        success = false;
-    }
-
-    var onCampus = document.getElementById("mode_on");
-    var offCampus = document.getElementById("mode_off");
-    if (!onCampus.checked && !offCampus.checked) {
-        addError("Please select a study mode.");
-        success = false;
-    }
-
+    
+   
     if (success) {
         // Calculate the total score
         

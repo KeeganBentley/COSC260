@@ -2,10 +2,11 @@
 $(function(){
   // run the changeImage function every 5000 ms
   setInterval("updateImage()", 5000);
+  setInterval("updateText()", 5000);
 })
 
 function updateImage() {
-  var $active = $('#slide_img img.active');
+  var $active = $('#slide_img .active');
 
   var $next = $active.next();
 
