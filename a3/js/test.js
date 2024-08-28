@@ -6,6 +6,10 @@ window.addEventListener("load", function (e) {
     //$('pet-image').hide();
 
     document.getElementById("pet_test").addEventListener("submit", validate);
+    document.getElementById("registration-form").addEventListener("submit", validate_rego);
+    document.getElementById("register-button").addEventListener("click", function() {
+        $('#registration-form').show();
+    });
     this.setInterval("updateImage()", 2000);
 });
 
@@ -120,4 +124,8 @@ function validate(e) {
         animate(total);
     }
     return success;
+}
+    
+function validate_rego(e) {
+    
 }
