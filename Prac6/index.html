@@ -1,0 +1,171 @@
+<!Doctype html>
+<html lang="en">
+  <head>
+     <meta charset="UTF-8" >
+     <link rel="stylesheet" href="cs/main.css" />
+     <!--<script src="https://unpkg.com/htmx.org@2.0.1"></script>-->
+      <!-- Comment out below and uncomment above to run on public_html -->
+     <script src="https://demo.htmx.org"></script>
+     <script type="text/JavaScript" src="js/my_script.js"></script>
+
+  </head>
+  <body>
+     <div id="header">
+        <h1>Checkers interface</h1>
+     </div>
+     <center>
+        <div id="inputs"></div>
+     </center>
+     <div id="playerone"></div>
+     <div id="playertwo"></div>
+
+  </body>
+
+</html>
+
+<template url="/playerone" delay="0">
+    <form >
+        <fieldset>
+            <legend>Player One </legend>
+            <label for="playeronename">Player One Name: </label>
+            <input type="text" name="playeronename" id="playeronename">
+            <label for="playeronerank">Rank: </label>
+            <input type="text" name="playeronerank" id="playeronerank">
+            <input type="submit" name="playeronesubmit" id="playeronesubmit" value="Submit">
+        </fieldset>
+    </form>
+</template>
+
+<template url="/playertwo" delay="0">
+    <form >
+        <fieldset>
+            <legend>Player Two </legend>
+            <label for="playertwoname">Player Two Name: </label>
+            <input type="text" name="playertwoname" id="playertwoname">
+            <label for="playertworank">Rank: </label>
+            <input type="text" name="playertworank" id="playertworank">
+            <input type="submit" name="playeronesubmit" id="playeronesubmit" value="Submit">
+        </fieldset>
+    </form>
+</template>
+
+<template url="/board" delay="0">
+    <table id="player-board" width="40%" height="20%">
+        <tr>
+            <td id="cell11"></td> <td id="cell12"></td> <td id="cell13"></td> <td id="cell14"></td>
+            <td id="cell15"></td> <td id="cell16"></td> <td id="cell17"></td> <td id="cell18"></td>
+        </tr>
+        <tr>
+            <td id="cell21"></td> <td id="cell22"></td> <td id="cell23"></td> <td id="cell24"></td>
+            <td id="cell25"></td> <td id="cell26"></td> <td id="cell27"></td> <td id="cell28"></td>
+        </tr>
+        <tr>
+            <td id="cell31"></td> <td id="cell32"></td> <td id="cell33"></td> <td id="cell34"></td>
+            <td id="cell35"></td> <td id="cell36"></td> <td id="cell37"></td> <td id="cell38"></td>
+        </tr>
+        <tr>
+            <td id="cell41"></td> <td id="cell42"></td> <td id="cell43"></td> <td id="cell44"></td>
+            <td id="cell45"></td> <td id="cell46"></td> <td id="cell47"></td> <td id="cell48"></td>
+        </tr>
+        <tr>
+            <td id="cell51"></td> <td id="cell52"></td> <td id="cell53"></td> <td id="cell54"></td>
+            <td id="cell55"></td> <td id="cell56"></td> <td id="cell57"></td> <td id="cell58"></td>
+        </tr>
+        <tr>
+            <td id="cell61"></td> <td id="cell62"></td> <td id="cell63"></td> <td id="cell64"></td>
+            <td id="cell65"></td> <td id="cell66"></td> <td id="cell67"></td> <td id="cell68"></td>
+        </tr>
+        <tr>
+            <td id="cell71"></td> <td id="cell72"></td> <td id="cell73"></td> <td id="cell74"></td>
+            <td id="cell75"></td> <td id="cell76"></td> <td id="cell77"></td> <td id="cell78"></td>
+        </tr>
+        <tr>
+            <td id="cell81"></td> <td id="cell82"></td> <td id="cell83"></td> <td id="cell84"></td>
+            <td id="cell85"></td> <td id="cell86"></td> <td id="cell87"></td> <td id="cell88"></td>
+        </tr>
+        </table>
+</template>
+
+
+<template url="/yellowchecker" delay="0">
+    <img src="img/yellow_checker.png"   />
+</template>
+
+<template url="/redchecker" delay="0">
+    <img src="img/red_checker.png" />
+</template>
+
+<script>
+    let playerONeName = " ";
+    let playerTwoName = " ";
+    let playerONeRank = "#";
+    let playerTwoRank = "#";
+    let playerOneScore = 0;
+    let playerTwoScore = 0;
+
+    function updatePlayerOne(){
+        let playerOneName = document.getElementById('playeronename').value;
+        let playerOneRank = document.getElementById('playeronerank').value;
+        document.getElementById('playerone').innerHTML = "Player One Name:" + playerOneName
+                                                    + "<br> Player One Rank: " + playerOneRank
+                                                    + "<br> Player One Score: " + playerOneScore;
+    }
+
+    function updatePlayerTwo(){
+        let playerTwoName = document.getElementById('playertwoname').value;
+        let playerTwoRank = document.getElementById('playertworank').value;
+        document.getElementById('playertwo').innerHTML = "Player Two Name:" + playerTwoName
+                                                    + "<br> Player Two Rank: " + playerTwoRank
+                                                    + "<br> Player Two Score: " + playerTwoScore;
+    }
+
+    let focused = false;
+    let focusId = 0;
+    let focusChoice =" ";
+    function focusCheck(i,choice){
+        var allTDs = htmx.findAll(htmx.find("#player-board"), "td");
+        if(focused){
+            let focusHTML = allTDs[focusId].innerHTML;
+            allTDs[focusId].innerHTML = allTDs[i].innerHTML;
+            allTDs[i].innerHTML = focusHTML;
+            allTDs[focusId].setAttribute("style",focusChoice+"border-color:grey;");
+            focused = false;
+        } else {
+            allTDs[i].setAttribute("style",choice+"border-color:red;");
+            focusChoice = choice;
+            focused=true;
+            focusId = i;
+        }
+    }
+
+    function placeboard(){
+        var allTDs = htmx.findAll(htmx.find("#player-board"), "td")
+        //allTDs.forEach((element) => console.log(element));
+        //can access allTDs[0].innerHTML, allTDs[0].id, allTDs[0].className etc
+        for(let i=0; i< allTDs.length;i++){
+            //allTDs[i].setAttribute("hx-post","/black");
+            //allTDs[i].setAttribute("hx-trigger","load delay:500ms");
+            let blackc= "background-image:url(img/black.png);";
+            let whitec="background-image:url(img/white.png);"
+            let choice = whitec;
+            if(Math.ceil((i+1)/8)%2==0){
+                if((i)%2==0) choice = blackc;
+                else choice = whitec;
+            } else{
+                if((i)%2==0) choice = whitec;
+                else choice = blackc;
+            }
+            allTDs[i].setAttribute("style",choice);
+            allTDs[i].setAttribute("valign","middle");
+            allTDs[i].setAttribute("align","center");
+            allTDs[i].setAttribute("hx-on:click","focusCheck("+i+", '"+choice+"')" );
+        }
+
+        for(let i=0; i< allTDs.length;i++){
+            if(i<16) allTDs[i].setAttribute("hx-post","/yellowchecker");
+            else if(i>47) allTDs[i].setAttribute("hx-post","/redchecker");
+            allTDs[i].setAttribute("hx-trigger","load delay:500ms");
+        }//*/
+    }
+
+</script>

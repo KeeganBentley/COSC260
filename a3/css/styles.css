@@ -1,24 +1,103 @@
-/* Animated Results */
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Form Styles */
+form div {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="tel"] {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Animation Styles */
+#animation {
+    position: relative;
+    width: 100%;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 #animation img {
-    position: absolute;
-    top: 50%;
-    left: 50%;
+    width: 75%;
+    max-width: 75%;
+    height: auto;
     opacity: 0.0;
-    transform: translate(-50%, -50%);
+    transition: opacity 0.5s ease-in-out;
 }
 
 #animation p {
-    position: absolute;
-    top: 50%;
-    left: 50%;
     opacity: 0.0;
-    transform: translate(-50%, -50%);
+    transition: opacity 0.5s ease-in-out;
 }
 
+/* Registration Button */
 #register-button {
-    display: none;
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#register-button:hover {
+    background-color: #0056b3;
+}
+
+/* Registration Form */
+#registration {
+    display: none; /* Initially hidden */
+    margin-top: 20px;
 }
 
 #registration-form {
-    display: none;
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
