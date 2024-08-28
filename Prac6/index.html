@@ -14,7 +14,7 @@
         <h1>Checkers interface</h1>
      </div>
      <center>
-        <div id="inputs"></div>
+        <div id="inputs" hx-post="/playerone" hx-trigger="load"></div>
      </center>
      <div id="playerone"></div>
      <div id="playertwo"></div>
@@ -24,7 +24,7 @@
 </html>
 
 <template url="/playerone" delay="0">
-    <form >
+    <form hx-post="/playertwo" hx-target="#inputs" hx-on::before-request="updatePlayerOne()">
         <fieldset>
             <legend>Player One </legend>
             <label for="playeronename">Player One Name: </label>
@@ -37,7 +37,7 @@
 </template>
 
 <template url="/playertwo" delay="0">
-    <form >
+    <form hx-post="/board" hx-target="#inputs" hx-on::before-request="updatePlayerTwo()">
         <fieldset>
             <legend>Player Two </legend>
             <label for="playertwoname">Player Two Name: </label>
@@ -50,7 +50,7 @@
 </template>
 
 <template url="/board" delay="0">
-    <table id="player-board" width="40%" height="20%">
+    <table id="player-board" width="40%" height="20%" hx-on::load="placeboard()">
         <tr>
             <td id="cell11"></td> <td id="cell12"></td> <td id="cell13"></td> <td id="cell14"></td>
             <td id="cell15"></td> <td id="cell16"></td> <td id="cell17"></td> <td id="cell18"></td>
